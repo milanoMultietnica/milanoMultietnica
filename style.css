@@ -1,0 +1,204 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+
+    background-image: url("imgs/sfondo.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#divTitolo {
+    width: 50%;
+    border: 2px solid black;
+    border-radius: 32px;
+    margin-bottom: 75px;
+
+    background-color: white;
+
+    text-align: center;
+}
+
+#imgMappa {
+    width:  900px;
+    height: 750px;
+    border: 4px solid black;
+    border-radius: 32px;
+}
+.imgIcona {
+    width:  75px;
+    height: 75px;
+}
+
+#divMappa {
+    position: relative;
+}
+#iconaPartenza {
+    position: absolute;
+    top:  100px;
+    left: 80px;
+}
+#iconaChinatown {
+    position: absolute;
+    top:  25px;
+    left: 195px;
+}
+#iconaMoscova {
+    position: absolute;
+    top:  200px;
+    left: 363px;
+}
+#iconaPortaVenezia1 {
+    position: absolute;
+    top:  210px;
+    left: 680px;
+}
+#iconaPortaVenezia2 {
+    position: absolute;
+    top:  100px;
+    left: 650px;
+}
+
+#divSchedaInfo {
+    display: none;
+    padding: 10px;
+    z-index: 1;
+
+    position: absolute;
+
+    background-color: white;
+
+    text-align: center;
+    word-wrap: break-word;
+}
+
+#divSchedaInfoExtra {
+    width:  250px;
+    height: 150px;
+    margin-top: 20px;
+    position: relative;
+}
+.divLaterale {
+    display: inline-block;
+    width: calc(50% - 10px);
+    padding: 10px;
+}
+#a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+#a div {
+    width: 50%;
+}
+
+.parolaFadeIn {
+    display: inline-block;
+    margin-right: 5px;
+
+    opacity: 0.0;
+    animation: fadeIn 1.0s linear 0.0s 1 normal forwards;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0.0;
+    }
+    to {
+        opacity: 1.0;
+    }
+}
+
+.bordoDisegnatoSopra {
+    width : 0%;
+    height: 3px;
+
+    position: absolute;
+    top : 0px;
+    left: 0px;
+
+    animation: disegnaBordoSopra 3.0s linear 0.0s 1 normal forwards;
+}
+@keyframes disegnaBordoSopra {
+    from {
+        left: 0px;
+        width: 0%;
+    }
+    to {
+        left: 0px;
+        width: 100%;
+    }
+}
+.bordoDisegnatoDestra {
+    width : 3px;
+    height: 0px;
+
+    position: absolute;
+    top  : 0px;
+    right: 0px;
+
+    animation: disegnaBordoDestra 3.0s linear 0.0s 1 normal forwards;
+}
+@keyframes disegnaBordoDestra {
+    from {
+        top: 0px;
+        height: 0%;
+    }
+    to {
+        top: 0px;
+        height: 100%;
+    }
+}
+.bordoDisegnatoSotto {
+    width : 0px;
+    height: 3px;
+
+    position: absolute;
+    bottom: 0px;
+    right : 0px;
+
+    animation: disegnaBordoSotto 3.0s linear 0.0s 1 normal forwards;
+}
+@keyframes disegnaBordoSotto {
+    from {
+        right: 0px;
+        width: 0%;
+    }
+    to {
+        right: 0px;
+        width: 100%;
+    }
+}
+.bordoDisegnatoSinistra {
+    width : 3px;
+    height: 0px;
+
+    position: absolute;
+    bottom: 0px;
+    left  : 0px;
+
+    animation: disegnaBordoSinistra 3.0s linear 0.0s 1 normal forwards;
+}
+@keyframes disegnaBordoSinistra {
+    from {
+        bottom: 0px;
+        height: 0%;
+    }
+    to {
+        bottom: 0px;
+        height: 100%;
+    }
+}
+
+#footer {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 10px;
+
+    position: fixed;
+    bottom: 0px;
+
+    background-color: rgba(255, 255, 255, 0.5);
+}

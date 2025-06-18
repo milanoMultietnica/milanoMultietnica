@@ -1,68 +1,78 @@
+html {
+    height: 100%;
+}
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
 
-    background-image: url("imgs/sfondo.jpeg");
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-color: #dda500;
+
+    font-family: "Avenir";
 }
 
-#divTitolo {
+header {
     width: 50%;
-    border: 2px solid black;
-    border-radius: 32px;
-    margin-bottom: 75px;
+    min-width: 200px;
+    margin-bottom: 50px;
 
-    background-color: white;
+    background-color: transparent;
 
     text-align: center;
 }
+header h1 {
+    margin-bottom: 10px;
+}
+header h2 {
+    margin-top: 0px;
+}
 
+section {
+    width: 80%;
+    position: relative;
+
+    text-align: center;
+}
 #imgMappa {
-    width:  900px;
-    height: 750px;
-    border: 4px solid black;
-    border-radius: 32px;
+    width: 100%;
+    aspect-ratio: 3 / 2;
 }
 .imgIcona {
-    width:  75px;
-    height: 75px;
+    width:  5%;
+    aspect-ratio: 3 / 4;
 }
 
-#divMappa {
-    position: relative;
-}
 #iconaPartenza {
     position: absolute;
-    top:  100px;
-    left: 80px;
+    top : 11%;
+    left: 10%;
 }
 #iconaChinatown {
     position: absolute;
-    top:  25px;
-    left: 195px;
+    top : 2%;
+    left: 23%;
 }
 #iconaMoscova {
     position: absolute;
-    top:  200px;
-    left: 363px;
+    top : 26%;
+    left: 44%;
 }
 #iconaPortaVenezia1 {
     position: absolute;
-    top:  210px;
-    left: 680px;
+    top : 10%;
+    left: 73%;
 }
 #iconaPortaVenezia2 {
     position: absolute;
-    top:  100px;
-    left: 650px;
+    top : 26%;
+    left: 77%;
 }
 
 #divSchedaInfo {
-    display: none;
+    width: 300px;
     padding: 10px;
+    border-radius: 20px;
     z-index: 1;
 
     position: absolute;
@@ -71,27 +81,52 @@ body {
 
     text-align: center;
     word-wrap: break-word;
+
+    opacity: 0.0;
+    transition: all 0.2s;
+}
+#divSchedaInfo h1 {
+    margin-bottom: 10px;
+}
+.fontMedio {
+    font-size: 20px;
+}
+.schedaInfoImgScuola {
+    margin-bottom: 10px;
+}
+
+.schedaInfoImg {
+    display: inline-block;
+    font-size: 13px;
+}
+.schedaInfoImg input, .schedaInfoImg img {
+    width : 90px;
+    height: 90px;
+    margin-left: 2px;
+    margin-right: 2px;
 }
 
 #divSchedaInfoExtra {
-    width:  250px;
-    height: 150px;
-    margin-top: 20px;
+    margin-top: 10px;
+    padding: 10px;
     position: relative;
 }
-.divLaterale {
-    display: inline-block;
-    width: calc(50% - 10px);
-    padding: 10px;
-}
-#a {
+#divExtraInfo {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
 }
-#a div {
+#divExtraInfoSx {
     width: 50%;
+}
+#divExtraInfoSx img {
+    width : 90%;
+    height: 120px;
+}
+#divExtraInfoDx {
+    width: 50%;
+    text-align: left;
 }
 
 .parolaFadeIn {
@@ -118,7 +153,7 @@ body {
     top : 0px;
     left: 0px;
 
-    animation: disegnaBordoSopra 3.0s linear 0.0s 1 normal forwards;
+    animation: disegnaBordoSopra 1.5s linear 0.0s 1 normal forwards;
 }
 @keyframes disegnaBordoSopra {
     from {
@@ -131,14 +166,14 @@ body {
     }
 }
 .bordoDisegnatoDestra {
-    width : 3px;
+    width : 2px;
     height: 0px;
 
     position: absolute;
     top  : 0px;
     right: 0px;
 
-    animation: disegnaBordoDestra 3.0s linear 0.0s 1 normal forwards;
+    animation: disegnaBordoDestra 1.5s linear 0.0s 1 normal forwards;
 }
 @keyframes disegnaBordoDestra {
     from {
@@ -152,13 +187,13 @@ body {
 }
 .bordoDisegnatoSotto {
     width : 0px;
-    height: 3px;
+    height: 2px;
 
     position: absolute;
     bottom: 0px;
     right : 0px;
 
-    animation: disegnaBordoSotto 3.0s linear 0.0s 1 normal forwards;
+    animation: disegnaBordoSotto 1.5s linear 0.0s 1 normal forwards;
 }
 @keyframes disegnaBordoSotto {
     from {
@@ -178,7 +213,7 @@ body {
     bottom: 0px;
     left  : 0px;
 
-    animation: disegnaBordoSinistra 3.0s linear 0.0s 1 normal forwards;
+    animation: disegnaBordoSinistra 1.5s linear 0.0s 1 normal forwards;
 }
 @keyframes disegnaBordoSinistra {
     from {
@@ -191,14 +226,26 @@ body {
     }
 }
 
-#footer {
-    display: flex;
-    justify-content: space-around;
+footer {
     width: 100%;
-    padding: 10px;
-
     position: fixed;
     bottom: 0px;
 
     background-color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+}
+.footerRiga {
+    display: inline-block;
+    width: 50%;
+    min-width: 200px;
+}
+.footerRiga div {
+    display: inline-block;
+    width: 50%;
+    padding: 10px;
+    vertical-align: middle;
+
+    box-sizing: border-box;
+
+    text-align: center;
 }

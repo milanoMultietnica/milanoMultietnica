@@ -1,13 +1,9 @@
-html {
-    height: 100%;
-}
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
 
-    background-color: #dda500;
+    background-color: #f2dc8a;
 
     font-family: "Avenir";
 }
@@ -25,7 +21,7 @@ header h1 {
     margin-bottom: 10px;
 }
 header h2 {
-    margin-top: 0px;
+    margin: 0px;
 }
 
 section {
@@ -34,6 +30,7 @@ section {
 
     text-align: center;
 }
+
 #imgMappa {
     width: 100%;
     aspect-ratio: 3 / 2;
@@ -70,15 +67,15 @@ section {
 }
 
 #divSchedaInfo {
-    width: 300px;
-    padding: 10px;
-    border-radius: 20px;
+    width: 30%;
+    min-width: 50px;
+    padding: 1%;
+    margin: 2%;
     z-index: 1;
 
     position: absolute;
 
     background-color: white;
-
     text-align: center;
     word-wrap: break-word;
 
@@ -86,52 +83,59 @@ section {
     transition: all 0.2s;
 }
 #divSchedaInfo h1 {
-    margin-bottom: 10px;
+    margin-top   : 1%;
+    margin-bottom: 5%;
 }
-.fontMedio {
-    font-size: 20px;
-}
-.schedaInfoImgScuola {
-    margin-bottom: 10px;
-}
+.schedaInfoImgs {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
 
-.schedaInfoImg {
-    display: inline-block;
     font-size: 13px;
 }
-.schedaInfoImg input, .schedaInfoImg img {
-    width : 90px;
-    height: 90px;
-    margin-left: 2px;
-    margin-right: 2px;
+.schedaInfoImgs div {
+    width: 33%;
+    padding: 2%;
+    box-sizing: border-box;
+}
+.schedaInfoImgs input {
+    width: 100%;
+    aspect-ratio: 1 / 1;
 }
 
 #divSchedaInfoExtra {
-    margin-top: 10px;
-    padding: 10px;
-    position: relative;
+    display: none;
+    position: absolute;
+    padding: 3%;
+
+    background-color: white;
+
+    text-align: center;
 }
-#divExtraInfo {
+#divSchedaInfoExtra img {
+    width: 40%;
+    aspect-ratio: 1 / 1;
+}
+
+#schedaInfoImgsScuola {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+    margin-bottom: 5%;
+
+    font-size: 13px;
 }
-#divExtraInfoSx {
+#schedaInfoImgsScuola div {
     width: 50%;
+    padding-left : 3px;
+    padding-right: 3px;
+    box-sizing: border-box;
 }
-#divExtraInfoSx img {
-    width : 90%;
-    height: 120px;
-}
-#divExtraInfoDx {
-    width: 50%;
-    text-align: left;
+#schedaInfoImgsScuola img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
 }
 
 .parolaFadeIn {
     display: inline-block;
-    margin-right: 5px;
 
     opacity: 0.0;
     animation: fadeIn 1.0s linear 0.0s 1 normal forwards;
@@ -166,7 +170,7 @@ section {
     }
 }
 .bordoDisegnatoDestra {
-    width : 2px;
+    width : 3px;
     height: 0px;
 
     position: absolute;
@@ -187,7 +191,7 @@ section {
 }
 .bordoDisegnatoSotto {
     width : 0px;
-    height: 2px;
+    height: 3px;
 
     position: absolute;
     bottom: 0px;
@@ -227,7 +231,12 @@ section {
 }
 
 footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
     width: 100%;
+
     position: fixed;
     bottom: 0px;
 
@@ -235,17 +244,15 @@ footer {
     text-align: center;
 }
 .footerRiga {
-    display: inline-block;
-    width: 50%;
+    flex: 1;
     min-width: 200px;
 }
 .footerRiga div {
     display: inline-block;
     width: 50%;
     padding: 10px;
-    vertical-align: middle;
-
     box-sizing: border-box;
+    vertical-align: middle;
 
     text-align: center;
 }

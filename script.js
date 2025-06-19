@@ -6,10 +6,10 @@ const ICONE_COLORI = [
 ];
 
 const LOCALI_IMGS = [
-    "meiJiaLe.jpeg"        , "milanoHoliday.jpeg"      , "mochiMochi.jpeg",
-    "perbelliniBistrot.jpg", "volemoseBene.jpg"        , "daFortunata.jpeg",
-    "mosobna.jpg"          , "adulis.jpg"              , "hdmona.jpg",
-    "riadMajorelle.jpg"    , "mourad.jpg"              , "medina.jpg",
+    "meiJiaLe.webp"         , "milanoHoliday.webp", "mochiMochi.webp",
+    "perbelliniBistrot.webp", "volemoseBene.webp" , "daFortunata.webp",
+    "mosobna.webp"          , "adulis.webp"       , "hdmona.webp",
+    "riadMajorelle.webp"    , "mourad.webp"       , "medina.webp",
 ];
 const LOCALI_NOMI = [
     "Mei Jia Le"        , "Milano Holiday"    , "Mochi Mochi",
@@ -33,16 +33,14 @@ const LOCALI_DESCRIZIONI = [
 ];
 
 const IMG_MAPPA = document.getElementById("imgMappa");
-const SCHEDA_INFO = document.getElementById("divSchedaInfo");
-const SCHEDA_INFO_EXTRA = document.createElement("div");
-SCHEDA_INFO_EXTRA.id = "divSchedaInfoExtra";
+const DIV_SCHEDA_INFO       = document.getElementById("divSchedaInfo");
+const DIV_SCHEDA_INFO_EXTRA = document.getElementById("divSchedaInfoExtra");
 
 let iconaCliccataI  = -1;
 let localeCliccatoI = -1;
 
 function schedaInfoAggiungiImg(localeSrc, localeI) {
     const div = document.createElement("div");
-    div.className = "schedaInfoImg";
     div.innerHTML += LOCALI_NOMI[localeI] + "<br>";
 
     const img = document.createElement("input");
@@ -54,12 +52,13 @@ function schedaInfoAggiungiImg(localeSrc, localeI) {
         "click", () => {
             if (localeCliccatoI == localeI) {
                 localeCliccatoI = -1;
-                SCHEDA_INFO_EXTRA.replaceChildren();
+                DIV_SCHEDA_INFO_EXTRA.replaceChildren();
+                DIV_SCHEDA_INFO_EXTRA.style.display = "none";
                 return;
             }
 
             localeCliccatoI = localeI;
-            SCHEDA_INFO_EXTRA.replaceChildren();
+            DIV_SCHEDA_INFO_EXTRA.replaceChildren();
 
             const divSx = document.createElement("div");
             divSx.id = "divExtraInfoSx";
@@ -68,12 +67,9 @@ function schedaInfoAggiungiImg(localeSrc, localeI) {
             divSxImg.src = img.src;
             divSxImg.alt = LOCALI_NOMI[localeI];
 
-            divSx.appendChild(divSxImg);
+            DIV_SCHEDA_INFO_EXTRA.appendChild(divSxImg);
 
-            const divDx = document.createElement("div");
-            divDx.id = "divExtraInfoDx";
-
-            let divDxHTML = "";
+            let divDxHTML = "<br>";
             LOCALI_DESCRIZIONI[localeI].match(/<[^>]+>|[^\s<>]+/g).forEach(
                 (parola, i) => {
                     if (parola.startsWith("<")) {
@@ -87,14 +83,8 @@ function schedaInfoAggiungiImg(localeSrc, localeI) {
                     }
                 }
             )
-            divDx.innerHTML = divDxHTML;
 
-            const divExtraInfo = document.createElement("div");
-            divExtraInfo.id = "divExtraInfo";
-            divExtraInfo.appendChild(divSx);
-            divExtraInfo.appendChild(divDx);
-
-            SCHEDA_INFO_EXTRA.appendChild(divExtraInfo);
+            DIV_SCHEDA_INFO_EXTRA.innerHTML += divDxHTML;
 
             const divBordoSopra    = document.createElement("div");
             const divBordoDestra   = document.createElement("div");
@@ -109,10 +99,11 @@ function schedaInfoAggiungiImg(localeSrc, localeI) {
             divBordoSotto.className    = "bordoDisegnatoSotto";
             divBordoSinistra.className = "bordoDisegnatoSinistra";
 
-            SCHEDA_INFO_EXTRA.appendChild(divBordoSopra);
-            SCHEDA_INFO_EXTRA.appendChild(divBordoDestra);
-            SCHEDA_INFO_EXTRA.appendChild(divBordoSinistra);
-            SCHEDA_INFO_EXTRA.appendChild(divBordoSotto);
+            DIV_SCHEDA_INFO_EXTRA.appendChild(divBordoSopra);
+            DIV_SCHEDA_INFO_EXTRA.appendChild(divBordoDestra);
+            DIV_SCHEDA_INFO_EXTRA.appendChild(divBordoSinistra);
+            DIV_SCHEDA_INFO_EXTRA.appendChild(divBordoSotto);
+            DIV_SCHEDA_INFO_EXTRA.style.display = "block";
         }
     );
 
@@ -133,52 +124,56 @@ function inizializzaIcona(iconaI, iconaId) {
             if (iconaCliccataI === iconaI) {return;}
 
             if (iconaCliccataI !== -1) {
-                SCHEDA_INFO.replaceChildren();
+                DIV_SCHEDA_INFO.replaceChildren();
             }
 
             iconaCliccataI  = -1;
             localeCliccatoI = -1;
-            SCHEDA_INFO_EXTRA.replaceChildren();
+            DIV_SCHEDA_INFO_EXTRA.replaceChildren();
+            DIV_SCHEDA_INFO_EXTRA.style.display = "none";
 
             const titolo = document.createElement("h1");
             titolo.innerHTML = ICONE_TITOLI[iconaI];
-            SCHEDA_INFO.appendChild(titolo);
+            DIV_SCHEDA_INFO.appendChild(titolo);
+
+            const divImgs = document.createElement("div");
+            divImgs.className = "schedaInfoImgs";
 
             const img1 = schedaInfoAggiungiImg(LOCALI_IMGS[(iconaI * 3) + 0], (iconaI * 3) + 0);
             const img2 = schedaInfoAggiungiImg(LOCALI_IMGS[(iconaI * 3) + 1], (iconaI * 3) + 1);
             const img3 = schedaInfoAggiungiImg(LOCALI_IMGS[(iconaI * 3) + 2], (iconaI * 3) + 2);
-            SCHEDA_INFO.appendChild(img1);
-            SCHEDA_INFO.appendChild(img2);
-            SCHEDA_INFO.appendChild(img3);
+            divImgs.appendChild(img1);
+            divImgs.appendChild(img2);
+            divImgs.appendChild(img3);
 
-            SCHEDA_INFO.appendChild(SCHEDA_INFO_EXTRA);
+            DIV_SCHEDA_INFO.appendChild(divImgs);
+            DIV_SCHEDA_INFO.appendChild(DIV_SCHEDA_INFO_EXTRA);
 
-            SCHEDA_INFO.style.opacity = 1.0;
+            DIV_SCHEDA_INFO.style.opacity = 1.0;
         }
     );
     document.getElementById(iconaId).addEventListener(
         "mouseleave", () => {
             if (iconaCliccataI === -1) {
-                SCHEDA_INFO.replaceChildren();
-                SCHEDA_INFO.style.opacity = 0.0;
+                DIV_SCHEDA_INFO.replaceChildren();
+                DIV_SCHEDA_INFO.style.opacity = 0.0;
             }
         }
     );
     document.getElementById(iconaId).addEventListener(
         "mousemove", (event) => {
             if (iconaCliccataI === -1) {
-                let bodyRet  = document.body.getBoundingClientRect();
-                let mappaRet = IMG_MAPPA.getBoundingClientRect();
-                let schedaInfoRet = SCHEDA_INFO.getBoundingClientRect();
+                const mappaRet = IMG_MAPPA.getBoundingClientRect();
+                const schedaInfoRet = DIV_SCHEDA_INFO.getBoundingClientRect();
 
-                let schedaInfoX = event.clientX + 10;
-                let schedaInfoY = event.clientY + 10;
-                if (schedaInfoX + schedaInfoRet.width > bodyRet.right) {
-                    schedaInfoX = event.clientX - 10 - schedaInfoRet.width;
+                let schedaInfoX   = event.clientX + 5;
+                const schedaInfoY = event.clientY + 5;
+                if (schedaInfoX + schedaInfoRet.width > window.innerWidth) {
+                    schedaInfoX = event.clientX - schedaInfoRet.width;
                 }
 
-                SCHEDA_INFO.style.left = (schedaInfoX - mappaRet.left) + "px";
-                SCHEDA_INFO.style.top  = (schedaInfoY - mappaRet.top ) + "px";
+                DIV_SCHEDA_INFO.style.left = ((schedaInfoX - mappaRet.x) / mappaRet.width  * 100) + "%";
+                DIV_SCHEDA_INFO.style.top  = ((schedaInfoY - mappaRet.y) / mappaRet.height * 100) + "%";
             }
         }
     );
@@ -195,70 +190,69 @@ document.getElementById("iconaPartenza").addEventListener(
         if (iconaCliccataI === -2) {return;}
 
         if (iconaCliccataI !== -1) {
-            SCHEDA_INFO.replaceChildren();
+            DIV_SCHEDA_INFO.replaceChildren();
         }
 
         iconaCliccataI  = -1;
         localeCliccatoI = -1;
-        SCHEDA_INFO_EXTRA.replaceChildren();
+        DIV_SCHEDA_INFO_EXTRA.replaceChildren();
+        DIV_SCHEDA_INFO_EXTRA.style.display = "none";
 
-        const titolo = document.createElement("h1");
-        titolo.className = "fontMedio";
-        titolo.innerHTML = "SCUOLA<br>ARTE & MESSAGGIO";
-        SCHEDA_INFO.appendChild(titolo);
+        const titolo = document.createElement("h3");
+        titolo.innerHTML = "SCUOLA ARTE & MESSAGGIO";
+        DIV_SCHEDA_INFO.appendChild(titolo);
+        DIV_SCHEDA_INFO.innerHTML += "Via Giuseppe Giusti, 42";
 
-        const divImg = document.createElement("div");
-        divImg.className = "schedaInfoImg schedaInfoImgScuola";
-        divImg.innerHTML += "Via Giuseppe Giusti, 42<br>";
+        const divImgs = document.createElement("div");
+        divImgs.id = "schedaInfoImgsScuola";
 
+        const divImgLogoScuola = document.createElement("div");
         const imgLogoScuola = document.createElement("img");
         imgLogoScuola.src = "imgs/logoScuola.webp";
         imgLogoScuola.alt = "Logo Scuola";
-        divImg.appendChild(imgLogoScuola);
+        divImgLogoScuola.appendChild(imgLogoScuola);
+
+        const divImgLogoComune = document.createElement("div");
         const imgLogoComune = document.createElement("img");
         imgLogoComune.src = "imgs/logoComune.webp";
         imgLogoComune.alt = "Logo Comune";
-        divImg.appendChild(imgLogoComune);
-        SCHEDA_INFO.appendChild(divImg);
+        divImgLogoComune.appendChild(imgLogoComune);
 
-        SCHEDA_INFO.innerHTML += "<br><a href='https://artemessaggio.comune.milano.it/' target='_blank'>link</a>";
+        divImgs.appendChild(divImgLogoScuola);
+        divImgs.appendChild(divImgLogoComune);
+        DIV_SCHEDA_INFO.appendChild(divImgs);
 
-        SCHEDA_INFO.style.opacity = 1.0;
+        DIV_SCHEDA_INFO.innerHTML += "<br><a href='https://artemessaggio.comune.milano.it/' target='_blank'>link</a>";
+
+        DIV_SCHEDA_INFO.style.opacity = 1.0;
     }
 );
 document.getElementById("iconaPartenza").addEventListener(
     "mouseleave", () => {
         if (iconaCliccataI === -1) {
-            SCHEDA_INFO.replaceChildren();
-            SCHEDA_INFO.style.opacity = 0.0;
+            DIV_SCHEDA_INFO.replaceChildren();
+            DIV_SCHEDA_INFO.style.opacity = 0.0;
         }
     }
 );
 document.getElementById("iconaPartenza").addEventListener(
     "mousemove", (event) => {
         if (iconaCliccataI === -1) {
-            let bodyRet  = document.body.getBoundingClientRect();
-            let mappaRet = IMG_MAPPA.getBoundingClientRect();
-            let schedaInfoRet = SCHEDA_INFO.getBoundingClientRect();
-
-            let schedaInfoX = event.clientX + 10;
-            let schedaInfoY = event.clientY + 10;
-            if (schedaInfoX + schedaInfoRet.width > bodyRet.right) {
-                schedaInfoX = event.clientX - 10 - schedaInfoRet.width;
-            }
-
-            SCHEDA_INFO.style.left = (schedaInfoX - mappaRet.left) + "px";
-            SCHEDA_INFO.style.top  = (schedaInfoY - mappaRet.top ) + "px";
+            const mappaRet = IMG_MAPPA.getBoundingClientRect();
+            DIV_SCHEDA_INFO.style.left = ((event.clientX - mappaRet.x) / mappaRet.width  * 100) + "%";
+            DIV_SCHEDA_INFO.style.top  = ((event.clientY - mappaRet.y) / mappaRet.height * 100) + "%";
         }
     }
 );
 
-IMG_MAPPA.addEventListener(
+document.body.addEventListener(
     "click", () => {
         iconaCliccataI  = -1;
         localeCliccatoI = -1;
-        SCHEDA_INFO.replaceChildren();
-        SCHEDA_INFO.style.opacity = 0.0;
+        DIV_SCHEDA_INFO.replaceChildren();
+        DIV_SCHEDA_INFO.style.opacity = 0.0;
+        DIV_SCHEDA_INFO_EXTRA.replaceChildren()
+        DIV_SCHEDA_INFO_EXTRA.style.display = "none";
     }
 )
 inizializzaIcona(0, "iconaChinatown");
@@ -266,7 +260,7 @@ inizializzaIcona(1, "iconaMoscova");
 inizializzaIcona(2, "iconaPortaVenezia1");
 inizializzaIcona(3, "iconaPortaVenezia2");
 
-SCHEDA_INFO.addEventListener(
+DIV_SCHEDA_INFO.addEventListener(
     "click", (event) => {
         event.stopPropagation();
     }
